@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Learning Lab - Experiments That Didn't Make It</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #faf7f2;
+            --text: #2a2a2a;
+            --text-light: #666;
+            --accent: #8b7355;
+            --border: #e0ddd5;
+            --hover-bg: #f0ede5;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'JetBrains Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .graveyard-animation {
+            margin: 0 auto 2rem;
+            width: 300px;
+            height: 180px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .experiment {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .experiment:hover {
+            background: var(--hover-bg);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+
+        .experiment-header {
+            margin-bottom: 1rem;
+        }
+
+        .experiment-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .tombstone {
+            display: inline-block;
+            margin-right: 0.5rem;
+            opacity: 0.5;
+        }
+
+        .lifespan {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .experiment-description {
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .cause-of-death {
+            padding: 1rem;
+            background: rgba(139, 115, 85, 0.08);
+            border-left: 3px solid var(--accent);
+            font-size: 0.9rem;
+            color: var(--text);
+            font-style: italic;
+        }
+
+        .cause-of-death strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        footer {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-message {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        .daily-brief-link {
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+            transition: opacity 0.2s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .experiment {
+                padding: 1.5rem;
+            }
+
+            .graveyard-animation {
+                width: 240px;
+                height: 144px;
+            }
+        }
+
+        /* SVG Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .ghost {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .star {
+            animation: fade 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <svg class="graveyard-animation" viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sky gradient -->
+                <defs>
+                    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3d4451;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5c6370;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4a6741;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#3d5436;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Sky background -->
+                <rect width="300" height="120" fill="url(#skyGradient)"/>
+
+                <!-- Moon -->
+                <circle cx="240" cy="30" r="18" fill="#e8dcc4" opacity="0.9"/>
+                <circle cx="245" cy="28" r="18" fill="#3d4451" opacity="0.3"/>
+
+                <!-- Stars -->
+                <circle class="star" cx="30" cy="20" r="1.5" fill="#fff" opacity="0.6" style="animation-delay: 0s;"/>
+                <circle class="star" cx="60" cy="35" r="1" fill="#fff" opacity="0.5" style="animation-delay: 0.3s;"/>
+                <circle class="star" cx="90" cy="15" r="1.5" fill="#fff" opacity="0.7" style="animation-delay: 0.6s;"/>
+                <circle class="star" cx="180" cy="25" r="1" fill="#fff" opacity="0.5" style="animation-delay: 0.9s;"/>
+                <circle class="star" cx="210" cy="50" r="1.5" fill="#fff" opacity="0.6" style="animation-delay: 1.2s;"/>
+
+                <!-- Ground -->
+                <rect x="0" y="120" width="300" height="60" fill="url(#groundGradient)"/>
+
+                <!-- Grass texture -->
+                <path d="M0 120 Q5 115 10 120 Q15 115 20 120 Q25 115 30 120 Q35 115 40 120 Q45 115 50 120 Q55 115 60 120 Q65 115 70 120 Q75 115 80 120 Q85 115 90 120 Q95 115 100 120 Q105 115 110 120 Q115 115 120 120 Q125 115 130 120 Q135 115 140 120 Q145 115 150 120 Q155 115 160 120 Q165 115 170 120 Q175 115 180 120 Q185 115 190 120 Q195 115 200 120 Q205 115 210 120 Q215 115 220 120 Q225 115 230 120 Q235 115 240 120 Q245 115 250 120 Q255 115 260 120 Q265 115 270 120 Q275 115 280 120 Q285 115 290 120 Q295 115 300 120"
+                      stroke="#3a4a34" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+                <!-- Dead tree silhouette -->
+                <path d="M 20 120 L 20 60 M 20 75 L 10 65 M 20 75 L 28 68 M 20 60 L 15 50 M 20 60 L 25 52"
+                      stroke="#2a2a2a" stroke-width="3" fill="none" opacity="0.6"/>
+
+                <!-- Fence -->
+                <g opacity="0.5">
+                    <rect x="240" y="100" width="4" height="25" fill="#4a4a4a"/>
+                    <rect x="250" y="100" width="4" height="25" fill="#4a4a4a"/>
+                    <rect x="260" y="100" width="4" height="25" fill="#4a4a4a"/>
+                    <rect x="270" y="100" width="4" height="25" fill="#4a4a4a"/>
+                    <rect x="280" y="100" width="4" height="25" fill="#4a4a4a"/>
+                    <rect x="238" y="105" width="50" height="3" fill="#4a4a4a"/>
+                    <rect x="238" y="115" width="50" height="3" fill="#4a4a4a"/>
+                </g>
+
+                <!-- Tombstone 1 (rounded top) -->
+                <rect x="60" y="95" width="35" height="35" rx="17.5" fill="#5a5a5a" opacity="0.8"/>
+                <rect x="62" y="97" width="31" height="30" rx="15.5" fill="#6a6a6a" opacity="0.6"/>
+                <text x="77.5" y="115" font-family="monospace" font-size="12" fill="#3d4451" text-anchor="middle" opacity="0.7">RIP</text>
+                <line x1="70" y1="135" x2="77" y2="140" stroke="#4a6741" stroke-width="2" opacity="0.6"/>
+                <line x1="85" y1="135" x2="78" y2="140" stroke="#4a6741" stroke-width="2" opacity="0.6"/>
+
+                <!-- Tombstone 2 (cross shaped) -->
+                <g>
+                    <rect x="125" y="85" width="25" height="40" fill="#5a5a5a" opacity="0.8"/>
+                    <rect x="127" y="87" width="21" height="36" fill="#6a6a6a" opacity="0.6"/>
+                    <rect x="115" y="95" width="45" height="15" fill="#5a5a5a" opacity="0.8"/>
+                    <rect x="117" y="97" width="41" height="11" fill="#6a6a6a" opacity="0.6"/>
+                    <line x1="130" y1="130" x2="137" y2="135" stroke="#4a6741" stroke-width="2" opacity="0.6"/>
+                    <line x1="145" y1="130" x2="138" y2="135" stroke="#4a6741" stroke-width="2" opacity="0.6"/>
+                </g>
+
+                <!-- Tombstone 3 (traditional) -->
+                <g>
+                    <path d="M 180 100 L 180 130 L 215 130 L 215 100 L 197.5 85 Z" fill="#5a5a5a" opacity="0.8"/>
+                    <path d="M 182 102 L 182 128 L 213 128 L 213 102 L 197.5 88 Z" fill="#6a6a6a" opacity="0.6"/>
+                    <text x="197.5" y="118" font-family="monospace" font-size="14" fill="#3d4451" text-anchor="middle" opacity="0.7">RIP</text>
+                    <line x1="188" y1="135" x2="195" y2="140" stroke="#4a6741" stroke-width="2" opacity="0.6"/>
+                    <line x1="207" y1="135" x2="200" y2="140" stroke="#4a6741" stroke-width="2" opacity="0.6"/>
+                </g>
+
+                <!-- Fog/mist effect -->
+                <ellipse cx="150" cy="145" rx="120" ry="20" fill="#f0f0f0" opacity="0.05"/>
+
+                <!-- Flying crow -->
+                <g class="ghost" transform="translate(0, 0)">
+                    <path d="M 100 45 Q 95 47 90 45 M 100 45 Q 105 47 110 45 M 100 45 L 100 48"
+                          stroke="#2a2a2a" stroke-width="2" fill="none" opacity="0.7"/>
+                </g>
+            </svg>
+
+            <h1>The Learning Lab</h1>
+            <p class="subtitle">Here lie our experiments that didn't make it. They failed fast, taught us much, and paved the way for what works today.</p>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-light); opacity: 0.7;">From the house of <a href="https://thedailybrief.zerodha.com" target="_blank" class="daily-brief-link">The Daily Brief</a></p>
+        </header>
+
+        <main>
+            <a href="https://onethingwelearned.today/" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        One Thing We Learned
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    Each issue, we'd share one new thing we picked up while researching or reporting. A small nugget that didn't fit anywhere else but felt too interesting to throw away.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    Turns out readers didn't want random nuggets. They wanted coherent stories. Who knew?
+                </div>
+            </a>
+
+            <a href="https://youtube.com/playlist?list=PLuJA1JMOOYDzFrBzuuIDcZZ0Cd9wUsZSo&si=W117iYG2kiBLFJBI" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        It's the Economy, Stupid
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    A dedicated macro piece. GDP, inflation, RBI policy, fiscal math — all the big picture stuff, but written so it didn't make your eyes glaze over. Or that was the idea, anyway.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    Eyes glazed over anyway. Macro is hard. Really hard. We tried.
+                </div>
+            </a>
+
+            <div class="experiment" style="cursor: default;">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        The Weekly Brief
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    A weekly roundup for people who couldn't keep up with the daily edition. Sounds simple, right? Turns out, condensing five days of context into one piece is way harder than writing five separate ones.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    Died of complexity. Also, people who wanted weekly weren't our people anyway.
+                </div>
+            </div>
+
+            <a href="https://youtube.com/playlist?list=PLuJA1JMOOYDxOTWv7Pux5STEj-4MBKo-N&si=GH2bJO90_wAcs3X4" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        Please Help Me Understand
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    We'd pick something that confused us — a regulation, a business model, a market trend — and try to explain it from scratch. Learning alongside the reader.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    Admitting confusion doesn't inspire confidence. Readers wanted experts, not fellow students.
+                </div>
+            </a>
+
+            <a href="https://thedailybrief.zerodha.com/s/the-world-simplified" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        The World, Simplified
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    An attempt to cover global events and international business with the same accessible lens we bring to Indian markets.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    The world refused to be simplified. Also, our readers cared about Indian markets. Shocking.
+                </div>
+            </a>
+
+            <a href="https://youtube.com/playlist?list=PLuJA1JMOOYDy_GLtitJtfjbLrpBv8hkmX&si=-iVArBkSit60IGim" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        Just a Little Beyond the Headlines
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    Short-ish pieces that took the day's biggest headline and asked: okay, but what's actually going on here? What's the context nobody's giving you?
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    This was literally just... our regular articles. We were already doing this. Oops.
+                </div>
+            </a>
+
+            <a href="https://thedailybrief.zerodha.com/s/what-does-that-mean" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        What Does That Mean
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    A glossary-meets-explainer series. What is a credit spread? What does a debt-to-equity ratio actually tell you? Financial jargon, decoded.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    Investopedia exists. We are not Investopedia. Hard pill to swallow.
+                </div>
+            </a>
+
+            <a href="https://whatthehellishappening.substack.com/" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        What the Hell Is Happening
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    For those days — or weeks — when everything seemed to be going sideways at once and you just needed someone to calmly walk you through the chaos.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    Turns out "calm" during chaos is hard to schedule. Also, chaos is relative and subjective.
+                </div>
+            </a>
+
+            <a href="https://thechatter.zerodha.com/s/plotlines" target="_blank" class="experiment">
+                <div class="experiment-header">
+                    <div class="experiment-name">
+                        <span class="tombstone">⚰️</span>
+                        Plotlines from The Chatter
+                    </div>
+                </div>
+                <div class="experiment-description">
+                    We tried pulling narrative threads across multiple earnings calls to spot bigger industry stories. Like, connecting what five different FMCG companies were saying about rural demand to paint a picture none of them were painting individually.
+                </div>
+                <div class="cause-of-death">
+                    <strong>Cause of Death:</strong>
+                    Brilliant in theory. Brutal in execution. Earnings calls are boring. Five of them? Torture.
+                </div>
+            </a>
+
+        </main>
+
+        <footer>
+            <div class="footer-message">
+                Here lies our failed experiments.<br>
+                They died so The Daily Brief could live.
+            </div>
+            <div class="footer-note">
+                Keep experimenting. Keep learning. Most things won't work. That's the point.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
